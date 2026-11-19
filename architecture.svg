@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="340" viewBox="0 0 800 340" font-family="Arial, sans-serif">
+  <rect width="800" height="340" fill="#ffffff"/>
+  <text x="400" y="32" text-anchor="middle" font-size="22" font-weight="bold" fill="#000000">Схема развертывания Music Wiki</text>
+  <text x="400" y="55" text-anchor="middle" font-size="14" fill="#333333">Локальный запуск в Docker Compose</text>
+
+  <g stroke="#000000" stroke-width="1.5" fill="#f7f7f7">
+    <rect x="15" y="120" width="140" height="80"/>
+    <rect x="190" y="120" width="150" height="80"/>
+    <rect x="390" y="120" width="160" height="80"/>
+    <rect x="600" y="120" width="185" height="80"/>
+  </g>
+
+  <text x="85" y="155" text-anchor="middle" font-size="18" font-weight="bold" fill="#000000">Браузер</text>
+  <text x="85" y="178" text-anchor="middle" font-size="14" fill="#333333">Chrome / Edge</text>
+
+  <text x="265" y="155" text-anchor="middle" font-size="18" font-weight="bold" fill="#000000">nginx</text>
+  <text x="265" y="178" text-anchor="middle" font-size="14" fill="#333333">порты 80 и 443</text>
+
+  <text x="470" y="155" text-anchor="middle" font-size="18" font-weight="bold" fill="#000000">Flask</text>
+  <text x="470" y="178" text-anchor="middle" font-size="14" fill="#333333">Gunicorn, порт 5000</text>
+
+  <text x="692" y="155" text-anchor="middle" font-size="18" font-weight="bold" fill="#000000">Supabase</text>
+  <text x="692" y="178" text-anchor="middle" font-size="14" fill="#333333">PostgreSQL, облако</text>
+
+  <line x1="155" y1="160" x2="184" y2="160" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="340" y1="160" x2="384" y2="160" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="550" y1="160" x2="594" y2="160" stroke="#000000" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text x="170" y="112" text-anchor="middle" font-size="13" fill="#333333">HTTPS</text>
+  <text x="362" y="112" text-anchor="middle" font-size="13" fill="#333333">HTTP</text>
+  <text x="572" y="112" text-anchor="middle" font-size="13" fill="#333333">HTTPS</text>
+
+  <text x="400" y="255" text-anchor="middle" font-size="15" fill="#000000">HTTP на порту 80 перенаправляется на HTTPS с кодом 301</text>
+  <text x="400" y="280" text-anchor="middle" font-size="15" fill="#000000">Снаружи открыты только порты nginx на 127.0.0.1</text>
+  <text x="400" y="305" text-anchor="middle" font-size="15" fill="#000000">Supabase работает в облаке и не запускается в Docker</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#000000"/>
+    </marker>
+  </defs>
+</svg>

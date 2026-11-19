@@ -1,0 +1,40 @@
+name: Validate deploy configuration
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Prepare env file
+        run: cp .env.example .env
+
+      - name: Validate Docker Compose
+        run: docker compose config
+
+      - name: Check required files
+        run: |
+          test -f docker-compose.yml
+          test -f nginx/nginx.conf
+          test -f README.md
+
+      - name: Validate nginx config
+        run: |
+          mkdir -p certs
+          openssl req -x509 -newkey rsa:2048 -nodes \
+            -keyout certs/music-wiki.localhost-key.pem \
+            -out certs/music-wiki.localhost.pem \
+            -days 1 -subj "/CN=music-wiki.localhost"
+          # имя app есть только в сети Docker Compose, для nginx -t
+          # достаточно, чтобы оно резолвилось
+          docker run --rm --add-host app:127.0.0.1 \
+            -v "$PWD/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro" \
+            -v "$PWD/certs:/etc/nginx/certs:ro" \
+            nginx:1.30-alpine nginx -t
